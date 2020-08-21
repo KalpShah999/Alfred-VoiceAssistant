@@ -10,3 +10,6 @@ The "UpdateAlfred/py" file is used to create new commands within Alfred himself.
  
 If the voice assistant is not running for you correctly, it could be because you may not have a lot of the packages that are required downloaded on your computer. 
  You can check the packages that you will need by just reviewing the imports that are being made on the "Alfred.py" file 
+ 
+The AIML file is there to provide Alfred some human like speech. The AIML files include phrases that ALfred would respond back with for instances where a command is not provided, but an interaction with Alfred is requested. 
+ This gives him a good chat bot like personaliltiy that I hope to expand in the future as well. 

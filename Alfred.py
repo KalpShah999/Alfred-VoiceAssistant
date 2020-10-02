@@ -19,7 +19,12 @@ from time import strftime
 import applescript
 import subprocess
 import aiml
+from Tkinter import *
+from PIL import ImageTk, Image
 import UpdateAlfred
+
+root = Tk(className='Alfred')
+root.geometry('500x500')
 
 lastCommand = ""
 isActive = True
@@ -36,25 +41,27 @@ def myCommand():
     followUp = False
     r = sr.Recognizer()
     with sr.Microphone() as source:
-        if isActive == True or requireAlfred == True:
-            print('Say something...')
+        #if isActive == True or requireAlfred == True:
+            #print('Say something...')
         r.pause_threshold = 0.5
         r.adjust_for_ambient_noise(source, duration=0.5)
         audio = r.listen(source)
     try:
         command = r.recognize_google(audio).lower()
         if isActive == True or requireAlfred == True:
-            print('You said: ' + command + '\n')
+            textInput.set('You: ' + command + '\n')
         lastCommand = command
 #loop back to continue to listen for commands if unrecognizable speech is received
     except sr.UnknownValueError:
         if isActive == True or requireAlfred == True:
-            print('....')
+            textInput.set('You: ....')
         command = myCommand();
+    updateAll()
     return command
     
 def leroyResponse(audio):
-    print(audio)
+    textOutput.set('Alfred: ' + audio)
+    updateAll()
     for char in audio.splitlines():
         os.system("say -v Daniel '[[rate 210]] '" + audio)
 
@@ -67,6 +74,10 @@ def recentCommand():
     
 def apple(string):
     applescript.AppleScript(string).run()
+    
+def updateAll():
+    root.update_idletasks()
+    root.update()
         
 def assistant(command):
     global lastCommand
@@ -116,7 +127,17 @@ end repeat""")
         elif 'open' in command or 'pull up' in command:
             if followUp == False:
                 leroyResponse(random.choice(confirmations))
-            if 'unity' in command:
+            if 'activity' in command:
+                apple("""tell application "activity monitor" to activate""")
+                followUp = True
+                command = command.replace('activity', '')
+                assistant(command)
+            elif 'parsec' in command:
+                apple("""tell application "parsec" to activate""")
+                followUp = True
+                command = command.replace('parsec', '')
+                assistant(command)
+            elif 'unity' in command:
                 apple("""tell application "unity hub" to activate""")
                 followUp = True
                 command = command.replace('unity', '')
@@ -424,10 +445,10 @@ end tell""")
         
 kernel = aiml.Kernel()
 
-if os.path.isfile("bot_brain.brn"):
-    kernel.bootstrap(brainFile="bot_brain.brn")
+if os.path.isfile("/Users/kalp/Alfred/bot_brain.brn"):
+    kernel.bootstrap(brainFile="/Users/kalp/Alfred/bot_brain.brn")
 else:
-    kernel.bootstrap(learnFiles="std-startup.xml", commands="load aiml b")
+    kernel.bootstrap(learnFiles="/Users/kalp/Alfred/std-startup.xml", commands="load aiml b")
 
 #leroyResponse('Booting up sir, one moment please.')
 
@@ -455,9 +476,27 @@ for line in data.splitlines():
     notCommands.append(line)
 f.close()
 
+
+#os.system("python UpdateAlfred.py")
+
+textInput = StringVar()
+textInput.set(' ')
+textOutput = StringVar()
+textOutput.set('Alfred: ')
+lblText = Label(root, textvariable = textInput, wraplength = 500)
+lblText.place(relx = 0.5, rely = 0.9, anchor = 'center')
+lblAnswer = Label(root, textvariable = textOutput, wraplength = 500)
+lblAnswer.place(relx = 0.5, rely = 0.95, anchor = 'center')
+alfredImage = ImageTk.PhotoImage(Image.open('/Users/kalp/Alfred/Alfred.jpg'))
+lblImage = Label(image = alfredImage)
+lblImage.place(relx = 0.5, rely = 0.45, anchor = 'center')
+
+updateAll()
+
 leroyResponse('Ready sir. Alfred at your service')
 
 while True:
+    updateAll()
     assistant(myCommand())
     
 #leroyResponse(random.choice(confirmations))

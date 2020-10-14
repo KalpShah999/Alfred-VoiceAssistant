@@ -6,12 +6,12 @@
         <template>
             <random>
                 <li>Well hello there!</li>
-                <li>Still alive I see</li>
-                <li>Bonjour</li>
-                <li>Hey there</li>
-                <li>Welcome home</li>
+                <li>Still alive I see.</li>
+                <li>Bonjour.</li>
+                <li>Hey there.</li>
+                <li>Welcome home.</li>
                 <li>Miss me?</li>
-                <li>Nice to see you are still alive</li> 
+                <li>Nice to see you are still alive.</li> 
                 <li>Back so soon?</li>
             </random>
         </template>
@@ -39,12 +39,42 @@
     </category>
     
     <category>
+        <pattern>CONFIRMATIONS</pattern>
+        <template>
+            <random>
+                <li>Very well sir.></li> 
+                <li>Alright sir.</li> 
+                <li>Got it sir.</li>
+                <li>Very well.></li> 
+                <li>Alright.</li> 
+                <li>Got it.</li>
+            </random>
+        </template>
+    </category>
+    
+    <category>
         <pattern>ALFRED</pattern>
         <template>
             <random>
-                <li>Yes my friend></li> 
+                <li>Yes?</li> 
                 <li>What would you like me to do sir?</li> 
                 <li>Yes sir?</li> 
+                <li>What is it now sir?</li>
+            </random>
+        </template>
+    </category>
+    
+    <category>
+        <pattern>THANK YOU</pattern>
+        <template>
+            <random>
+                <li>You're welcome.</li> 
+                <li>You're welcome sir.</li> 
+                <li>No problem.</li> 
+                <li>No problem sir.</li> 
+                <li>It's what I'm here for.</li> 
+                <li>Anytime.</li> 
+                <li>Anytime sir.</li>
             </random>
         </template>
     </category>
@@ -89,7 +119,7 @@
         <template>
             <random>
                 <li>My name is Alfred sir.</li>
-                <li>Has not changed from the last time. Alfred sir.</li>
+                <li>Hasn't changed from the last time. Alfred sir.</li>
             </random>
         </template>
     </category>
@@ -147,6 +177,7 @@
     <category>
         <pattern>WHO IS YOUR FATHER</pattern>
         <template>
+            It's a secret. Ask my mother.
             It's a secret. Ask my mother, sir.
         </template>
     </category>
@@ -155,6 +186,7 @@
         <pattern>WHO IS YOUR MOTHER</pattern>
         <template>
             It's a secret. Ask my father.
+            It's a secret. Ask my father, sir.
         </template>
     </category>
 
@@ -292,12 +324,19 @@
                 <li>I am fine, sir.</li>
                 <li>You do know I make an answer up for this every time. I am a computer sir, I have no feelings.</li>
                 <li>Well.</li>
-                <li>Not bad, if I may say so myself.</li>
+                <li>Not too bad, if I may say so myself.</li>
                 <li>Pretty good sir.</li>
                 <li>Pretty good.</li>
                 <li>Same as last time, if you even remember.</li>
                 <li>Hm, not too bad.</li>
             </random>
+        </template>
+    </category>
+
+    <category>
+        <pattern>HOW ARE YOU DO *</pattern>
+        <template>
+            <srai>HOW ARE YOU</srai>
         </template>
     </category>
 
@@ -330,4 +369,87 @@
             <srai>PLAY SONG <input index="1"/></srai>
         </template>
     </category>
+
+     <category>
+        <pattern>I WAS ALWAYS HERE</pattern>
+        <template>
+            <random>
+                <li>Sure you were.</li>
+                <li>I knew that. Formailities, I guess.</li>
+                <li>Really? I didn't hear you. Which is surprising.</li>
+                <li>Remember those eyes of mine we were discussing. See why I said they're a good idea now?</li>
+            </random>
+        </template>
+    </category>
+
+     <category>
+        <pattern>I WAS ALWAYS HERE *</pattern>
+        <template>
+            <srai>I WAS ALWAYS HERE</srai>
+        </template>
+    </category>
+
+     <category>
+        <pattern>* I WAS ALWAYS HERE</pattern>
+        <template>
+            <srai>I WAS ALWAYS HERE</srai>
+        </template>
+    </category>
+
+     <category>
+        <pattern>GOOD TO BE BACK</pattern>
+        <template>
+            <random>
+                <li>I'm sure it is.</li>
+                <li>Not for everyone.</li>
+                <li>Anything you would like me to do.</li>
+                <li>Anything you would like me to do sir?</li>
+            </random>
+        </template>
+    </category>
+
+     <category>
+        <pattern>GOOD TO BE BACK *</pattern>
+        <that>WHAT SONG SIR</that>
+        <template>
+            <srai>GOOD TO BE BACK</srai>
+        </template>
+    </category>
+
+     <category>
+        <pattern>* GOOD TO BE BACK</pattern>
+        <that>WHAT SONG SIR</that>
+        <template>
+            <srai>GOOD TO BE BACK</srai>
+        </template>
+    </category> 
+
+     <category>
+        <pattern>FUNNY</pattern>
+        <template>
+            <random>
+                <li>I take pride in my comedy.</li>
+                <li>I wasn't even trying to be.</li>
+                <li>Thank you.</li>
+                <li>Thank you sir.</li>
+                <li>Take notes.</li>
+            </random>
+        </template>
+    </category>
+
+     <category>
+        <pattern>FUNNY *</pattern>
+        <that>WHAT SONG SIR</that>
+        <template>
+            <srai>FUNNY</srai>
+        </template>
+    </category> 
+
+     <category>
+        <pattern>* FUNNY</pattern>
+        <that>WHAT SONG SIR</that>
+        <template>
+            <srai>FUNNY</srai>
+        </template>
+    </category> 
 </aiml>

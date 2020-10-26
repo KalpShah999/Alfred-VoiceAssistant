@@ -78,6 +78,13 @@ def apple(string):
 def updateAll():
     root.update_idletasks()
     root.update()
+    
+
+def updateFrames(ind):
+    frame = frames[ind]
+    ind += 1
+    labelGIF.configure(image=frame)
+    root.after(100, updateFrames, ind)
         
 def assistant(command):
     global lastCommand
@@ -487,11 +494,17 @@ lblText = Label(root, textvariable = textInput, wraplength = 500)
 lblText.place(relx = 0.5, rely = 0.9, anchor = 'center')
 lblAnswer = Label(root, textvariable = textOutput, wraplength = 500)
 lblAnswer.place(relx = 0.5, rely = 0.95, anchor = 'center')
-alfredImage = ImageTk.PhotoImage(Image.open('/Users/kalp/Alfred/Alfred.jpg'))
+alfredImage = ImageTk.PhotoImage(Image.open('/Users/kalp/Alfred/Alfred.jpg'), format = 'gif -index 5')
 lblImage = Label(image = alfredImage)
 lblImage.place(relx = 0.5, rely = 0.45, anchor = 'center')
 
+
+frames = [PhotoImage(file='/Users/kalp/Alfred/AlfredFrames.gif',format = 'gif -index %i' %(i)) for i in range(12)]
+labelGIF = Label(root)
+labelGIF.pack()
+
 updateAll()
+updateFrames(0)
 
 leroyResponse('Ready sir. Alfred at your service')
 
